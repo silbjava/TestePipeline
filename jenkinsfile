@@ -28,18 +28,18 @@ pipeline {
                                 echo "Implementando o teste da unidade..."
                            }
                            }
-                            stage('Integration test') {
-                              agent {
-                                    docker {
-                                            reuseNode true
-                                            image 'ubuntu'
-                                           }
-                                    }
-                              steps {
-                                echo "Running the integration test..."
-                              }
-                           }
-                           }
-                           }
+                        //     stage('Integration test') {
+                        //       agent {
+                        //             docker {
+                        //                     reuseNode true
+                        //                     image 'ubuntu'
+                        //                    }
+                        //             }
+                        //       steps {
+                        //         echo "Running the integration test..."
+                        //       }
+                        //    }
+                        //    }
+                        //    }
               }
 }
