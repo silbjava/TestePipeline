@@ -3,7 +3,7 @@ pipeline {
          stages {
                  stage('One') {
                  steps {
-                     echo 'Hi, this is Zulaikha from edureka'
+                     echo 'Olá, aqui é o silvano testando o echo no pipeline'
                  }
                  }
                  stage('Two') {
@@ -14,7 +14,7 @@ pipeline {
                  stage('Three') {
                  when {
                        not {
-                            branch "master"
+                            branch "main"
                        }
                  }
                  steps {
@@ -25,7 +25,7 @@ pipeline {
                  parallel { 
                             stage('Unit Test') {
                            steps {
-                                echo "Running the unit test.."
+                                echo "Implementando o teste da unidade..."
                            }
                            }
                             stage('Integration test') {
