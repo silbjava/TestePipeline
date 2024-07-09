@@ -41,8 +41,7 @@ pipeline {
                         //    }
                            }
                            }
-                   stage('Five') {
-                        stage("Verfificando ferramentas") {
+                        stage('Verfificando ferramentas') {
                               steps {
                                     sh '''
                                           docker version
@@ -53,6 +52,5 @@ pipeline {
                                     '''
                               }
                         }
-                  }
               }
 }
