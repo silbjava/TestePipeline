@@ -1,31 +1,40 @@
+def COLOR_MAP = ['SUCCESS': 'good', 'FAILURE': 'danger', 'UNSTABLE': 'danger', 'ABORTED': 'danger']
 pipeline {
          agent any
          stages {
-                 stage('One') {
-                 steps {
-                     echo 'Olá, aqui é o silvano testando o echo no pipeline'
+                  stage('Checkout') {
+                        steps {
+                        // slackSend channel: 'jenkins-ci', color: '#33AFFF', message: "*STARTED*: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n *More info at:* ${env.BUILD_URL}", teamDomain: 'devteam', tokenCredentialId: 'slack'
+                        git branch: 'main', url: 'https://github.com/silbjava/TestePipeline.git'
+                        }
+                  }
+
+                  stage('One') {
+                        steps {
+                              echo 'Olá, aqui é o silvano testando o echo no pipeline'
+                        }
+                   }
+                  stage('Two') {
+                        steps {
+                              input('Do you want to proceed?')
+                        }
+                  }
+                  stage('Three') {
+                        when {
+                              not {
+                                    branch "main"
+                              }
+                        }
+                        steps {
+                              echo "Hello, branch is not main"
+                        }
                  }
-                 }
-                 stage('Two') {
-                 steps {
-                    input('Do you want to proceed?')
-                 }
-                 }
-                 stage('Three') {
-                 when {
-                       not {
-                            branch "main"
-                       }
-                 }
-                 steps {
-                       echo "Hello"
-                 }
-                 }
-                 stage('Four') {
-                 parallel { 
+                  stage('Four') {
+                  parallel { 
                             stage('Unit Test') {
                            steps {
-                                echo "Implementando o teste da unidade..."
+                              
+                              echo "Implementando o teste da unidade..."
                            }
                            }
                         //     stage('Integration test') {
@@ -52,5 +61,11 @@ pipeline {
                                     // jq --version
                               }
                         }
-              }
+            }
+            //Fazendo teste de post always, sucess and failure
+            post { 
+                  always {color: COLOR_MAP[currentBuild.currentResult], echo 'verificando a execução do post always' }
+                  sucess { color: COLOR_MAP[currentBuild.currentResult], echo 'The pipeline was executed with sucess!' }
+                  failure { color: COLOR_MAP[currentBuild.currentResult], echo 'Find error in pipeline script!!' }
+            }
 }
