@@ -65,7 +65,7 @@ pipeline {
       //Fazendo teste de post always, sucess and failure
       post { 
             always { echo 'verificando a execução do post always' }
-            sucess {  echo 'The pipeline was executed with sucess!' }
+            success {  echo 'The pipeline was executed with sucess!' }
             failure { echo 'Find error in pipeline script!!' }
       }
            
