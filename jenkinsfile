@@ -64,9 +64,9 @@ pipeline {
       }
       //Fazendo teste de post always, sucess and failure
       post { 
-            always { color: COLOR_MAP[currentBuild.currentResult], echo 'verificando a execução do post always' }
-            // sucess { color: COLOR_MAP[currentBuild.currentResult], echo 'The pipeline was executed with sucess!' }
-            // failure { color: COLOR_MAP[currentBuild.currentResult], echo 'Find error in pipeline script!!' }
+            always { echo 'verificando a execução do post always' }
+            sucess {  echo 'The pipeline was executed with sucess!' }
+            failure { echo 'Find error in pipeline script!!' }
       }
            
 }
